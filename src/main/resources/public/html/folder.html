@@ -1,0 +1,34 @@
+<h1>Folder</h1>
+<style>
+    .folder-parent {
+        display: table;
+    }
+
+    .folder-parent>div {
+        display: table-row;
+    }
+
+    .folder-parent>div>div {
+        display: table-cell;
+        padding: 2px 5px;
+    }
+</style>
+<div>
+    <button ng-click="newNotebook()">New Notebook</button>
+    <button ng-click="newFolder()">New Folder</button>
+    <button ng-if="isRoot()" ng-click="goUpFolder()">..</button>
+</div>
+<div class="folder-parent">
+    <div>
+        <div>Filename</div>
+        <div>Last Modified</div>
+        <div>Actions</div>
+    </div>
+    <div ng-repeat="file in files">
+        <div>{{ file.filename }}</div>
+        <div>{{ file.lastUpdate | date : 'hh:mm:ss dd/MM/yyyy' }}</div>
+        <div>
+            <button ng-if="canExecute(file)" ng-click="open(file)">Open</button>
+        </div>
+    </div>
+</div>
